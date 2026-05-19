@@ -1,27 +1,125 @@
 /* ==========================================================================
-   Stephen Xie–inspired minimal style overrides for PaperMod.
-   Goal: single-column, generous whitespace, no card borders, subtle hover.
+   Stephen Xie–inspired minimal style: academic, quiet, restrained.
+   Key: serif headings, blue titles, gray body, thin separators, no dark nav.
    ========================================================================== */
 
-/* --- Layout: narrower content, more breathing room --- */
+/* --- Color palette (light mode overrides) --- */
 :root {
-  --content-width: 640px;
-  --gap: 28px;
+  --content-width: 680px;
+  --gap: 24px;
   --radius: 0;
+
+  /* Stephen Xie palette */
+  --heading-color: #1a3a6b;
+  --body-color: #3d3d3d;
+  --meta-color: #888;
+  --separator: #e5e5e5;
+  --bg: #ffffff;
+  --hover-bg: #f8f8f8;
 }
 
+/* Force light-only feel (override PaperMod dark mode vars when in light) */
+body {
+  background: var(--bg) !important;
+  color: var(--body-color);
+}
+
+/* --- Typography --- */
+
+/* Page/section titles: serif, blue */
+.post-title,
+h1.post-title,
+.first-entry .entry-header h1,
+.posts-group .post-entry .entry-header h2 a,
+.post-entry .entry-header h2 a,
+.entry-header h2 a,
+.entry-header h1 {
+  font-family: Georgia, "Times New Roman", serif;
+  color: var(--heading-color);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+/* Section page title (like "Posts" / "Writings") */
+.page-header h1,
+.term-title {
+  font-family: Georgia, "Times New Roman", serif;
+  color: #111;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+/* Body text */
+.post-content,
+.entry-content,
+.post-entry .entry-content {
+  color: var(--body-color);
+  line-height: 1.8;
+  font-size: 0.95rem;
+}
+
+/* Meta (date, reading time) — small, gray */
+.post-meta,
+.post-date,
+.post-entry .post-meta {
+  color: var(--meta-color);
+  font-size: 0.82rem;
+  opacity: 1;
+}
+
+/* Hide reading time and author from list entries (keep only date) */
+.post-entry .post-meta span:not(:first-child) {
+  display: none;
+}
+
+/* --- Layout --- */
 .main {
   max-width: var(--content-width);
   margin: 0 auto;
-  padding: 2rem 1.25rem 4rem;
+  padding: 2.5rem 1.5rem 4rem;
 }
 
-/* --- Remove card-like styling from post list entries --- */
+/* --- Navigation: white background, minimal --- */
+header.header {
+  background: var(--bg) !important;
+  border-bottom: none;
+  box-shadow: none;
+}
+
+.header .logo a,
+.header .logo {
+  color: #111;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.nav {
+  max-width: var(--content-width);
+  margin: 0 auto;
+}
+
+#menu a {
+  color: var(--body-color);
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+#menu a:hover {
+  opacity: 1;
+  text-decoration: none;
+}
+
+#menu a.active {
+  opacity: 1;
+  font-weight: 600;
+}
+
+/* --- Post list entries --- */
 .post-entry {
   border: none;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid var(--separator);
   border-radius: 0;
-  padding: 1.5rem 0;
+  padding: 1.8rem 0;
   margin: 0;
   background: none;
   box-shadow: none;
@@ -31,33 +129,36 @@
   border-bottom: none;
 }
 
-/* Subtle hover: light background tint */
+/* Hover: very subtle background */
 .post-entry:hover {
-  background: var(--code-bg);
-  border-radius: 6px;
-  margin: 0 -0.75rem;
-  padding: 1.5rem 0.75rem;
+  background: var(--hover-bg);
+  border-radius: 4px;
+  margin: 0 -1rem;
+  padding: 1.8rem 1rem;
 }
 
-/* --- Typography: looser line-height, softer headings --- */
-.post-content {
-  line-height: 1.8;
-  font-size: 1rem;
+/* Entry title link color */
+.post-entry .entry-header h2 a {
+  color: var(--heading-color);
 }
 
-.post-content h1,
-.post-content h2,
-.post-content h3 {
-  line-height: 1.4;
-  margin-top: 2.5rem;
-  margin-bottom: 0.75rem;
-  font-weight: 600;
+.post-entry .entry-header h2 a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
-/* --- Links: no underline by default, underline on hover with transition --- */
+/* Entry summary/description */
+.post-entry .entry-content {
+  color: #555;
+  font-size: 0.9rem;
+  margin-top: 0.4rem;
+}
+
+/* --- Links --- */
 a {
+  color: var(--heading-color);
   text-decoration: none;
-  transition: all 0.2s ease;
+  transition: all 0.15s ease;
 }
 
 a:hover {
@@ -65,41 +166,25 @@ a:hover {
   text-underline-offset: 3px;
 }
 
-/* Nav links keep their existing style but get the transition */
-.nav a:hover {
-  text-decoration: none;
-  opacity: 0.7;
-}
-
-/* --- Navigation: cleaner, less visual weight --- */
-.nav {
-  max-width: var(--content-width);
-  margin: 0 auto;
-}
-
-header.header {
-  border-bottom: none;
-  box-shadow: none;
-}
-
-/* --- Home info section: tighter, more like a personal statement --- */
+/* --- First entry / Home info --- */
 .first-entry {
   border: none;
   box-shadow: none;
   min-height: auto;
   padding: 2rem 0;
+  border-bottom: 1px solid var(--separator);
 }
 
 .first-entry .entry-content {
-  font-size: 1rem;
+  font-size: 0.95rem;
   line-height: 1.8;
-  max-width: 100%;
+  color: var(--body-color);
 }
 
-/* --- Social icons: smaller, subtler --- */
+/* --- Social icons: subtle --- */
 .social-icons a {
-  opacity: 0.6;
-  transition: opacity 0.2s ease;
+  opacity: 0.5;
+  transition: opacity 0.15s ease;
 }
 
 .social-icons a:hover {
@@ -107,68 +192,117 @@ header.header {
   text-decoration: none;
 }
 
-/* --- Footer: minimal --- */
-.footer {
-  border-top: none;
-  opacity: 0.5;
-  font-size: 0.85rem;
+.social-icons svg {
+  width: 20px;
+  height: 20px;
 }
 
-/* --- Code blocks: softer background --- */
+/* --- Footer: barely visible --- */
+.footer {
+  border-top: none;
+  opacity: 0.4;
+  font-size: 0.8rem;
+  color: var(--meta-color);
+}
+
+/* --- Hide breadcrumbs --- */
+.breadcrumbs {
+  display: none;
+}
+
+/* --- Hide RSS icon next to section titles --- */
+.rss-link {
+  display: none;
+}
+
+/* --- Article detail page --- */
+.post-content h1,
+.post-content h2,
+.post-content h3 {
+  font-family: Georgia, "Times New Roman", serif;
+  color: #111;
+  line-height: 1.4;
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+}
+
+.post-content blockquote {
+  border-left: 2px solid var(--separator);
+  background: none;
+  padding-left: 1rem;
+  margin-left: 0;
+  color: #555;
+  font-style: normal;
+}
+
 .post-content pre {
-  border-radius: 6px;
-  border: 1px solid var(--border);
+  border-radius: 4px;
+  border: 1px solid var(--separator);
 }
 
 .post-content code {
   word-break: break-word;
 }
 
-/* --- Blockquotes: subtle left border, no background --- */
-.post-content blockquote {
-  border-left: 2px solid var(--border);
-  background: none;
-  padding-left: 1rem;
-  margin-left: 0;
-  opacity: 0.85;
-  font-style: normal;
-}
-
-/* --- Tags: pill style, very light --- */
+/* --- Tags: pill, very light --- */
 .post-tags a {
-  border: 1px solid var(--border);
+  border: 1px solid var(--separator);
   border-radius: 99px;
-  padding: 0.2rem 0.6rem;
-  font-size: 0.8rem;
-  opacity: 0.7;
+  padding: 0.15rem 0.55rem;
+  font-size: 0.78rem;
+  color: var(--meta-color);
 }
 
 .post-tags a:hover {
-  opacity: 1;
+  color: var(--heading-color);
+  border-color: var(--heading-color);
   text-decoration: none;
-  background: var(--code-bg);
+  background: var(--hover-bg);
 }
 
-/* --- Reading time / meta: lighter --- */
-.post-meta {
-  opacity: 0.6;
-  font-size: 0.85rem;
-}
-
-/* --- Breadcrumbs: hide for cleaner look --- */
-.breadcrumbs {
-  display: none;
-}
-
-/* --- TOC: subtler --- */
+/* --- TOC: minimal --- */
 .toc {
   border: none;
   background: none;
   padding-left: 0;
 }
 
-/* --- Pagination: minimal --- */
+/* --- Pagination: clean --- */
 .pagination {
   border-top: none;
   padding-top: 2rem;
+}
+
+/* --- Dark mode: keep it but adjust to match the quiet feel --- */
+.dark {
+  --heading-color: #8ab4f8;
+  --body-color: #ccc;
+  --meta-color: #777;
+  --separator: #333;
+  --bg: #1a1a1a;
+  --hover-bg: #222;
+}
+
+.dark body {
+  background: var(--bg) !important;
+}
+
+.dark header.header {
+  background: var(--bg) !important;
+}
+
+.dark .post-content h1,
+.dark .post-content h2,
+.dark .post-content h3 {
+  color: #e0e0e0;
+}
+
+/* --- Theme toggle: keep but make subtle --- */
+#theme-toggle {
+  opacity: 0.5;
+}
+
+#theme-toggle:hover {
+  opacity: 1;
 }
