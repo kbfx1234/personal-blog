@@ -258,7 +258,7 @@
     - _Requirements: 10.1, 10.2_
     - _Properties: P10_
 
-- [ ] 6. P6：校验脚本与正确性属性测试
+- [x] 6. P6：校验脚本与正确性属性测试
   - 建立 Node + TypeScript + fast-check + vitest 测试工程，覆盖 design.md §Correctness Properties 的 15 条 Property，并提供给本地预提交使用的 `scripts/preflight.sh`、`scripts/check_slugs.py`、`scripts/check_frontmatter.py`、`scripts/check_internal_links.mjs` 工具。
 
   - [x] 6.1 初始化 Node 测试工程
@@ -295,7 +295,7 @@
     - 验证：`npx vitest --version` 输出版本号；`ls node_modules/fast-check` 存在
     - _Requirements: 14_
 
-  - [ ] 6.2 编写 fixture 生成器 tests/fixtures/postGenerator.ts
+  - [x] 6.2 编写 fixture 生成器 tests/fixtures/postGenerator.ts
     - 文件 `tests/fixtures/postGenerator.ts`：
       - `import * as fc from "fast-check"`
       - 导出 `slugArb`：返回 fast-check arbitrary，生成符合 `^[a-z0-9-]{1,100}$` 的字符串
@@ -306,7 +306,7 @@
     - 验证：写一个最小手测脚本 `npx tsx -e "import('./tests/fixtures/postGenerator.ts').then(m => console.log(typeof m.postArb))"` 应打印 `object`
     - _Requirements: 14_
 
-  - [ ] 6.3 编写预提交脚本与配套 Python 工具
+  - [x] 6.3 编写预提交脚本与配套 Python 工具
     - 文件 `scripts/preflight.sh`，整段照 `design.md §Appendix B`
     - 文件 `scripts/check_slugs.py`：读取 `content/posts/*.md` 的 front matter（用 `python3 -c "import frontmatter"` 不行就退而用 `re` 切 `^---` 块 + `pyyaml`），校验 slug 集合 `^[a-z0-9-]{1,100}$` 与全局唯一，违例 `sys.exit(1)` 并打印冲突文件
     - 文件 `scripts/check_frontmatter.py`：校验每篇文章 `title ≤ 200`、`description ≤ 160`、`summary ≤ 300`、`tags` 数组长度 ≤ 10 且每项 ≤ 30 字符、`date` 解析成功
@@ -315,7 +315,7 @@
     - 验证：`bash scripts/preflight.sh` 应能通过当前两篇文章的检查；故意把 `content/posts/hello-world.md` 的 slug 改成 `Hello-World` 后再跑应失败，确认报错信息后改回
     - _Requirements: 7.4, 7.5, 8.2, 8.3, 14_
 
-  - [ ] 6.4 Property 1 测试：slug 字符集与长度（最少 100 次迭代）
+  - [x] 6.4 Property 1 测试：slug 字符集与长度（最少 100 次迭代）
     - 文件 `tests/properties/property-01-slug-validator.test.ts`
     - 实现纯函数 `isValidSlug(s: string): boolean`（在 `tests/fixtures/slug.ts` 中导出，测试与 `scripts/check_slugs.py` 同源逻辑），断言：`fc.assert(fc.property(fc.string(), s => isValidSlug(s) === (/^[a-z0-9-]{1,100}$/.test(s))), { numRuns: 100 })`
     - 头部注释 `// Feature: personal-blog, Property 1: Slug 字符集与长度校验`
@@ -393,16 +393,16 @@
     - _Requirements: 6.2_
     - _Properties: P15_
 
-  - [ ] 6.19 P6 检查点 — 跑完整 PBT 套件
+  - [x] 6.19 P6 检查点 — 跑完整 PBT 套件
     - 必跑：`npm run preflight`（必须通过）
     - 可选：`npm test`（按 6.4–6.18 的覆盖跑 fast-check + vitest，预计 5–15 分钟）
     - 提交全部测试代码：`git add scripts package.json package-lock.json tsconfig.json vitest.config.ts tests`，`git commit -m "test: add fast-check property tests for 15 properties"`
     - 失败时停下与用户沟通，避免盲目放过测试。
 
-- [ ] 7. P7：GitHub 仓库与 Cloudflare Pages 部署
+- [x] 7. P7：GitHub 仓库与 Cloudflare Pages 部署
   - 把本地仓库推到 GitHub，并在 Cloudflare Pages 配置自动构建。
 
-  - [ ] 7.1 [手动] 在 GitHub 上创建空仓库
+  - [x] 7.1 [手动] 在 GitHub 上创建空仓库
     - 浏览器打开 https://github.com/new
     - Repository name 填 `{YOUR_REPO_NAME}`（默认 `personal-blog`），可见性选 Public 或 Private 任一；不要勾选 README/.gitignore/license（本地已有）
     - 点击 Create repository
@@ -410,7 +410,7 @@
     - 验证：访问 `https://github.com/{YOUR_GH_USERNAME}/{YOUR_REPO_NAME}` 返回 200
     - _Requirements: 4.1_
 
-  - [ ] 7.2 关联远端并首次推送
+  - [x] 7.2 关联远端并首次推送
     - `git remote add origin git@github.com:{YOUR_GH_USERNAME}/{YOUR_REPO_NAME}.git`
     - 替换上面命令中的占位符为真实值后执行
     - `git branch -M main`
@@ -418,13 +418,13 @@
     - 验证：刷新 GitHub 仓库页面，能看到 `themes/PaperMod` 显示为 submodule（带 commit 哈希），其他文件已就位
     - _Requirements: 4.4_
 
-  - [ ] 7.3 [手动] 注册并登录 Cloudflare 账户
+  - [x] 7.3 [手动] 注册并登录 Cloudflare 账户
     - 浏览器打开 https://dash.cloudflare.com/sign-up，已有账号则登录
     - 完成邮箱验证
     - 验证：能进入 Cloudflare Dashboard 并看到左侧菜单 Workers & Pages、Web Analytics 等
     - _Requirements: 5, 6_
 
-  - [ ] 7.4 [手动] 在 Cloudflare Pages 创建项目并接入 GitHub
+  - [x] 7.4 [手动] 在 Cloudflare Pages 创建项目并接入 GitHub
     - Dashboard → Workers & Pages → Create → Pages → Connect to Git
     - 授权 Cloudflare 访问 GitHub 上的 `{YOUR_REPO_NAME}` 仓库
     - 选择项目仓库，进入 Set up builds and deployments：
@@ -440,7 +440,7 @@
     - 验证：构建日志最末段显示 `Deploying ... Success`，得到一个 `https://{project}.pages.dev` 临时域名，浏览器访问可见博客
     - _Requirements: 5.1, 5.4, 5.6, 6.1, 6.2, 6.4_
 
-  - [ ] 7.5 [手动] 验证 push-to-deploy 链路
+  - [x] 7.5 [手动] 验证 push-to-deploy 链路
     - 本地修改 `content/posts/hello-world.md` 任意一段正文
     - `git add content/posts/hello-world.md && git commit -m "test: trigger CF Pages build" && git push`
     - 在 Cloudflare Pages 项目页面 Deployments 标签观察新一次构建：60 秒内出现 In progress；5 分钟内 Success
@@ -525,7 +525,7 @@
     - 验证：GitHub 仓库 Actions tab 出现 `gh-pages-backup` workflow，但因为 `workflow_dispatch` 不会自动跑，状态为 Never run
     - _Requirements: 6.4_
 
-  - [ ] 9.3 输出 Setup_Checklist 交付物 docs/setup-checklist.md
+  - [x] 9.3 输出 Setup_Checklist 交付物 docs/setup-checklist.md
     - `mkdir -p docs`
     - 创建 `docs/setup-checklist.md`，按以下结构逐节填写（Requirement 14 的硬性条款）：
       - 文档开头：`# 个人博客准备清单`、调研完成日期 `YYYY-MM-DD`、声明所有时效性数据以该日期为准
@@ -555,7 +555,7 @@
     - 在 iPhone Safari 与 Android Chrome 真机访问一次（可让朋友帮跑），重复以上视觉巡检
     - _Requirements: 9.1, 9.2, 9.3, 9.4, 9.5, 9.6, 9.7_
 
-  - [ ] 9.5 上线验证 / Definition of Done — 走完 7 条观察判据
+  - [x] 9.5 上线验证 / Definition of Done — 走完 7 条观察判据
     - 1）`curl -I https://{YOUR_DOMAIN}/` 返回 200 且首屏 ≤ 3s（用 DevTools Performance 看 LCP）— 满足 AC 2.2、5.1
     - 2）站点至少含 `/`、`/about/`、`/posts/`、两篇示例文章详情页（HTTP 200）— AC 7、AC 8.7
     - 3）暗 / 亮模式按系统偏好自动切换，导航栏存在切换入口，状态写入 localStorage（任务 9.4）— AC 9.2–9.6

@@ -50,7 +50,7 @@ enableGitInfo = true
   ShowReadingTime = true
   ShowShareButtons = false
   ShowPostNavLinks = true
-  ShowBreadCrumbs = true
+  ShowBreadCrumbs = false
   ShowCodeCopyButtons = true
   ShowToc = true
   TocOpen = false
@@ -59,8 +59,8 @@ enableGitInfo = true
   comments = true
 
   [params.homeInfoParams]
-    Title = "你好，我是 Karl"
-    Content = "这里是我记录学习、生活与思考的地方。"
+    Title = "Karl"
+    Content = "记录学习、生活与思考。"
 
   [[params.socialIcons]]
     name = "github"

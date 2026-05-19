@@ -1,24 +1,174 @@
-/* PaperMod extended styles — loaded after the theme CSS. */
+/* ==========================================================================
+   Stephen Xie–inspired minimal style overrides for PaperMod.
+   Goal: single-column, generous whitespace, no card borders, subtle hover.
+   ========================================================================== */
 
+/* --- Layout: narrower content, more breathing room --- */
 :root {
-  --content-width: 760px;
+  --content-width: 640px;
+  --gap: 28px;
+  --radius: 0;
 }
 
-/* Long URLs / inline code shouldn't blow out narrow viewports. */
+.main {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 2rem 1.25rem 4rem;
+}
+
+/* --- Remove card-like styling from post list entries --- */
+.post-entry {
+  border: none;
+  border-bottom: 1px solid var(--border);
+  border-radius: 0;
+  padding: 1.5rem 0;
+  margin: 0;
+  background: none;
+  box-shadow: none;
+}
+
+.post-entry:last-child {
+  border-bottom: none;
+}
+
+/* Subtle hover: light background tint */
+.post-entry:hover {
+  background: var(--code-bg);
+  border-radius: 6px;
+  margin: 0 -0.75rem;
+  padding: 1.5rem 0.75rem;
+}
+
+/* --- Typography: looser line-height, softer headings --- */
+.post-content {
+  line-height: 1.8;
+  font-size: 1rem;
+}
+
+.post-content h1,
+.post-content h2,
+.post-content h3 {
+  line-height: 1.4;
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+}
+
+/* --- Links: no underline by default, underline on hover with transition --- */
+a {
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Nav links keep their existing style but get the transition */
+.nav a:hover {
+  text-decoration: none;
+  opacity: 0.7;
+}
+
+/* --- Navigation: cleaner, less visual weight --- */
+.nav {
+  max-width: var(--content-width);
+  margin: 0 auto;
+}
+
+header.header {
+  border-bottom: none;
+  box-shadow: none;
+}
+
+/* --- Home info section: tighter, more like a personal statement --- */
+.first-entry {
+  border: none;
+  box-shadow: none;
+  min-height: auto;
+  padding: 2rem 0;
+}
+
+.first-entry .entry-content {
+  font-size: 1rem;
+  line-height: 1.8;
+  max-width: 100%;
+}
+
+/* --- Social icons: smaller, subtler --- */
+.social-icons a {
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+}
+
+.social-icons a:hover {
+  opacity: 1;
+  text-decoration: none;
+}
+
+/* --- Footer: minimal --- */
+.footer {
+  border-top: none;
+  opacity: 0.5;
+  font-size: 0.85rem;
+}
+
+/* --- Code blocks: softer background --- */
+.post-content pre {
+  border-radius: 6px;
+  border: 1px solid var(--border);
+}
+
 .post-content code {
   word-break: break-word;
 }
 
-/* Slightly tighter line-height for headings inside posts. */
-.post-content h1,
-.post-content h2,
-.post-content h3 {
-  line-height: 1.35;
+/* --- Blockquotes: subtle left border, no background --- */
+.post-content blockquote {
+  border-left: 2px solid var(--border);
+  background: none;
+  padding-left: 1rem;
+  margin-left: 0;
+  opacity: 0.85;
+  font-style: normal;
 }
 
-/* Soften block quotes a touch. */
-.post-content blockquote {
-  border-left-width: 3px;
-  font-style: normal;
-  opacity: 0.9;
+/* --- Tags: pill style, very light --- */
+.post-tags a {
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  padding: 0.2rem 0.6rem;
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+.post-tags a:hover {
+  opacity: 1;
+  text-decoration: none;
+  background: var(--code-bg);
+}
+
+/* --- Reading time / meta: lighter --- */
+.post-meta {
+  opacity: 0.6;
+  font-size: 0.85rem;
+}
+
+/* --- Breadcrumbs: hide for cleaner look --- */
+.breadcrumbs {
+  display: none;
+}
+
+/* --- TOC: subtler --- */
+.toc {
+  border: none;
+  background: none;
+  padding-left: 0;
+}
+
+/* --- Pagination: minimal --- */
+.pagination {
+  border-top: none;
+  padding-top: 2rem;
 }
