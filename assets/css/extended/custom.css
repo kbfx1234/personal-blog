@@ -166,19 +166,44 @@ a:hover {
   text-underline-offset: 3px;
 }
 
-/* --- First entry / Home info --- */
+/* --- First entry / Home info (disabled — using _index.md now) --- */
 .first-entry {
-  border: none;
-  box-shadow: none;
-  min-height: auto;
-  padding: 2rem 0;
-  border-bottom: 1px solid var(--separator);
+  display: none;
 }
 
-.first-entry .entry-content {
+/* --- Home intro (Stephen Xie style) --- */
+.home-page {
+  padding-top: 3rem;
+}
+
+.home-intro h1 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 0.3rem;
+}
+
+.home-email {
+  display: block;
+  color: var(--meta-color);
+  font-size: 0.85rem;
+  margin-bottom: 0.8rem;
+}
+
+.home-links {
+  margin-bottom: 2.5rem;
+}
+
+.home-links a {
+  color: #111;
+  text-decoration: underline;
+  text-underline-offset: 3px;
   font-size: 0.95rem;
-  line-height: 1.8;
-  color: var(--body-color);
+}
+
+.home-links a:hover {
+  color: var(--heading-color);
 }
 
 /* --- Social icons: subtle --- */

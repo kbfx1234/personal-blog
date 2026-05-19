@@ -59,8 +59,8 @@ enableGitInfo = true
   comments = true
 
   [params.homeInfoParams]
-    Title = "Karl"
-    Content = "记录学习、生活与思考。"
+    Title = ""
+    Content = ""
 
   [[params.socialIcons]]
     name = "github"
@@ -106,7 +106,7 @@ enableGitInfo = true
 [menu]
   [[menu.main]]
     identifier = "posts"
-    name = "文章"
+    name = "Writings"
     url = "/posts/"
     weight = 10
   [[menu.main]]
@@ -115,12 +115,7 @@ enableGitInfo = true
     url = "/tags/"
     weight = 20
   [[menu.main]]
-    identifier = "about"
-    name = "关于"
-    url = "/about/"
-    weight = 30
-  [[menu.main]]
     identifier = "search"
     name = "搜索"
     url = "/search/"
-    weight = 40
+    weight = 30
