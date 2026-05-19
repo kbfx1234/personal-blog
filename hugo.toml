@@ -47,6 +47,7 @@ enableGitInfo = true
   author = "Karl"
   description = "记录学习、生活与思考"
   defaultTheme = "auto"
+  googleSiteVerification = "5x7gh_K5zHxUCZ6abVk2RVL1yFApiUZchXrNqaZmmpc"
   ShowReadingTime = true
   ShowShareButtons = false
   ShowPostNavLinks = true
@@ -80,9 +81,9 @@ enableGitInfo = true
 
   [params.giscus]
     repo = "kbfx1234/personal-blog"
-    repoId = "{GISCUS_REPO_ID}"
+    repoId = "R_kgDOShhf6A"
     category = "Comments"
-    categoryId = "{GISCUS_CATEGORY_ID}"
+    categoryId = "DIC_kwDOShhf6M4C9Xs2"
     mapping = "pathname"
     reactionsEnabled = "1"
     emitMetadata = "0"
@@ -92,7 +93,7 @@ enableGitInfo = true
 
   [params.analytics]
     [params.analytics.cloudflare]
-      token = "{CF_WEB_ANALYTICS_TOKEN}"
+      token = "34a6e1c2e74e4b1594033f5843f8ff95"
 
   [params.fuseOpts]
     isCaseSensitive = false

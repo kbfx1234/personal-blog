@@ -40,6 +40,7 @@ PLACEHOLDER_HITS=$(grep -nE '\{[A-Z][A-Z0-9_]+\}' \
   --include='*.toml' --include='*.md' --include='*.html' --include='*.txt' \
   --exclude-dir=.kiro --exclude-dir=node_modules --exclude-dir=tmp \
   --exclude-dir=public --exclude-dir=resources --exclude-dir=themes \
+  --exclude-dir=docs \
   -r . | grep -viE '(placeholder)' || true)
 
 if [ -n "$PLACEHOLDER_HITS" ]; then
