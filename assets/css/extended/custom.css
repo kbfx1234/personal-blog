@@ -1,0 +1,24 @@
+/* PaperMod extended styles — loaded after the theme CSS. */
+
+:root {
+  --content-width: 760px;
+}
+
+/* Long URLs / inline code shouldn't blow out narrow viewports. */
+.post-content code {
+  word-break: break-word;
+}
+
+/* Slightly tighter line-height for headings inside posts. */
+.post-content h1,
+.post-content h2,
+.post-content h3 {
+  line-height: 1.35;
+}
+
+/* Soften block quotes a touch. */
+.post-content blockquote {
+  border-left-width: 3px;
+  font-style: normal;
+  opacity: 0.9;
+}

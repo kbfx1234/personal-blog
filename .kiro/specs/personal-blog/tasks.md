@@ -10,7 +10,7 @@
 
 ## Tasks
 
-- [ ] 1. P1：本地环境与仓库初始化
+- [x] 1. P1：本地环境与仓库初始化
   - 安装本地工具链、初始化 git 仓库、引入 PaperMod 主题，得到一个可被 Hugo 识别的空骨架。
 
   - [x] 1.1 安装 Hugo extended（macOS）
@@ -62,14 +62,14 @@
     - 验证：`git status` 应显示 `.gitignore`、`LICENSE`、`README.md` 三个未跟踪文件
     - _Requirements: 4.3_
 
-  - [-] 1.6 P1 检查点 — 提交骨架
+  - [x] 1.6 P1 检查点 — 提交骨架
     - `git add .gitmodules themes .gitignore LICENSE README.md archetypes layouts content static hugo.toml data 2>/dev/null || true`
     - `git add -A`
     - `git commit -m "chore: init hugo skeleton with papermod submodule"`
     - 验证：`git log --oneline` 应至少看到一条提交；`git submodule status` 应输出一行 PaperMod commit 哈希
     - 若有问题，向用户确认后再继续。
 
-- [ ] 2. P2：站点骨架与基础配置
+- [x] 2. P2：站点骨架与基础配置
   - 用 `design.md §Configuration Design` 的字段写好 `hugo.toml`，配齐 favicon、OG 默认图等静态占位资源，使本地 `hugo server` 能起 PaperMod 默认首页。
 
   - [x] 2.1 写入 hugo.toml 主配置
@@ -90,7 +90,7 @@
     - 验证：`ls static/` 应看到 4 个文件；`file static/og-default.png` 应识别为 PNG
     - _Requirements: 10.1, 10.2_
 
-  - [-] 2.3 首次本地预览
+  - [x] 2.3 首次本地预览
     - 执行：`hugo server -D --bind 0.0.0.0 --baseURL http://localhost:1313/`
     - 在浏览器打开 http://localhost:1313/
     - 验证：首页能渲染 PaperMod 默认外观；右上角有 主题切换 与 RSS 入口；终端显示 `Web Server is available at http://localhost:1313/`
@@ -98,10 +98,10 @@
     - 若启动失败：检查终端报错；常见原因为 1313 端口被占用，加参数 `--port 1314` 重试
     - _Requirements: 3.3, 3.4, 9.4_
 
-- [ ] 3. P3：信息架构与内容
+- [x] 3. P3：信息架构与内容
   - 建好 `about.md`、`content/posts/` 两篇示例文章、archetype 模板。
 
-  - [-] 3.1 编写 archetypes/default.md（front matter 模板）
+  - [x] 3.1 编写 archetypes/default.md（front matter 模板）
     - 覆盖文件 `archetypes/default.md`：
       ```markdown
       ---
@@ -120,7 +120,7 @@
     - 验证：`hugo new content/posts/test-archetype.md` 创建新文件后 `cat content/posts/test-archetype.md` 能看到上述全部字段；删除该测试文件 `rm content/posts/test-archetype.md`
     - _Requirements: 8.2, 8.5_
 
-  - [ ] 3.2 写「关于我」页面 content/about.md
+  - [x] 3.2 写「关于我」页面 content/about.md
     - 创建：`hugo new content/about.md`
     - 编辑文件，把 `draft: true` 改成 `draft: false`
     - 在正文部分写：一段自我介绍（≤ 2000 字符）、一组研究/技能方向列表、一段「联系方式」段落注明 GitHub 和邮箱
@@ -129,29 +129,29 @@
     - 验证：`hugo server -D` 后访问 `http://localhost:1313/about/`，可见简介、技能列表、社交链接区块；停止 dev server
     - _Requirements: 7.1, 8.5_
 
-  - [ ] 3.3 写示例文章 1：content/posts/hello-world.md
+  - [x] 3.3 写示例文章 1：content/posts/hello-world.md
     - `hugo new content/posts/hello-world.md`
     - 用 `design.md §Content Model` 的完整示例覆盖文件，把 `draft` 改成 `false`，正文留三级标题大纲（≥ 500 字，≥ 3 个层级），含一个代码块 ` ```bash echo "hello" ``` ` 和一段 `$$ e^{i\pi}+1=0 $$` 数学公式（front matter 同步把 `math: true`）
     - tags 至少 2 个（如 `["meta", "blog"]`），categories 一项（如 `["杂记"]`）
     - 验证：`hugo server -D` 后访问 `http://localhost:1313/posts/hello-world/`，正文渲染、代码高亮、KaTeX 公式渲染（任务 4.3 之后才会真正出公式，现在可能是原始 LaTeX，正常）
     - _Requirements: 7.4, 8.1, 8.2, 8.6, 8.7_
 
-  - [ ] 3.4 写示例文章 2：content/posts/about-me.md
+  - [x] 3.4 写示例文章 2：content/posts/about-me.md
     - `hugo new content/posts/about-me.md`
     - 主题：「自我介绍 / About Me」；字数 500–1500；至少 3 级标题大纲；`tags: ["intro"]`；`categories: ["about"]`；`draft: false`；填写 `summary`（≤ 300 字）与 `description`（≤ 160 字）
     - 验证：`hugo list all` 应同时列出 `posts/hello-world.md` 与 `posts/about-me.md`
     - _Requirements: 7.2, 7.4, 8.2, 8.7_
 
-  - [ ] 3.5 P3 检查点 — 本地预览首页与列表
+  - [x] 3.5 P3 检查点 — 本地预览首页与列表
     - `hugo server` (不带 -D，模拟生产)
     - 浏览器访问 `http://localhost:1313/posts/`，应按发布日期倒序看到两篇文章；点击进入详情页正常；导航栏显示「文章 / 标签 / 关于 / 搜索」（搜索页会在 P4 接入）
     - 停止 dev server
     - 此时如有问题向用户确认（典型问题：menu 缺项、标签未生成）。
 
-- [ ] 4. P4：主题扩展与可选增强集成
+- [x] 4. P4：主题扩展与可选增强集成
   - 通过 PaperMod 提供的 `extend_head.html` / `comments.html` 等 partial 钩子，注入 KaTeX、SEO meta 截断、Giscus、CF Web Analytics、Pagefind 搜索页与 robots.txt，构建期不修改主题源代码。
 
-  - [ ] 4.1 创建 layouts/partials/extend_head.html — 注入 KaTeX、CF Analytics、Search Console 验证、SEO meta 截断
+  - [x] 4.1 创建 layouts/partials/extend_head.html — 注入 KaTeX、CF Analytics、Search Console 验证、SEO meta 截断
     - 创建目录：`mkdir -p layouts/partials`
     - 文件 `layouts/partials/extend_head.html`：
       - 顶部按 `design.md §Theming and Styling Decisions / KaTeX 集成` 段落抄录 `<link rel="stylesheet" ...katex.min.css>` 与两段 `<script defer ...>`，整段用 `{{- if or .Params.math .Site.Params.math }} ... {{- end }}` 包裹
@@ -175,13 +175,13 @@
     - 验证：保存后跑 `hugo --minify --gc`；打开 `public/index.html` 应能看到 `<meta name="description"...>` 与 `<meta property="og:description"...>`；在文章详情页源代码出现 KaTeX `<link>` 和 `<script defer>`
     - _Requirements: 8.6, 10.1, 10.2, 10.7, 12.1, 12.5_
 
-  - [ ] 4.2 创建 layouts/partials/comments.html — Giscus 嵌入
+  - [x] 4.2 创建 layouts/partials/comments.html — Giscus 嵌入
     - 文件 `layouts/partials/comments.html`，照抄 `design.md §Optional Enhancements / Giscus / 集成点 第 4 步` 的完整 `{{- with .Site.Params.giscus }}...{{- end }}` 块
     - 整段在最外层加保护：`{{- if .Site.Params.comments }} ... {{- end }}`，确保 `params.comments = false` 时不输出任何字符（满足 Property 11 反向条件）
     - 验证：保存后 `hugo --minify --gc`；`grep -r "giscus.app" public/posts/` 在 `params.comments=true` 时应有匹配；临时把 `hugo.toml` 的 `comments = true` 改成 `false` 重跑构建后 `grep -r "giscus" public/` 必须返回空，再改回 `true`
     - _Requirements: 11.1, 11.2, 11.3, 11.5_
 
-  - [ ] 4.3 PaperMod 扩展样式 — assets/css/extended/custom.css
+  - [x] 4.3 PaperMod 扩展样式 — assets/css/extended/custom.css
     - `mkdir -p assets/css/extended`
     - 创建 `assets/css/extended/custom.css`，最少包含：
       ```css
@@ -191,7 +191,7 @@
     - 验证：`hugo --minify --gc`；用浏览器打开任意构建产物 `public/posts/hello-world/index.html`，DevTools 中能看到 `--content-width` 变量被合并到主 CSS
     - _Requirements: 9.1_
 
-  - [ ] 4.4 接入 Pagefind 搜索 — layouts/search.html
+  - [x] 4.4 接入 Pagefind 搜索 — layouts/search.html
     - 创建文件 `layouts/search.html`，整段使用 `design.md §Optional Enhancements / Pagefind / 集成点 第 2 步` 的 HTML
     - 在 hugo.toml 的 `params` 顶层添加（PaperMod 内置 fuse.js 搜索仍可作为 fallback；无需删除 fuseOpts 配置）：暂不需改
     - 创建一个空的 `content/search.md`（仅承载 `/search/` 页面 URL）：
@@ -207,7 +207,7 @@
     - 验证：`hugo --minify --gc`；在 P6 之后会有 Pagefind 真实索引；当前先确认 `public/search/index.html` 存在，其中含 `pagefind-ui.js` 引用
     - _Requirements: 13.1, 13.3_
 
-  - [ ] 4.5 SEO 与 Feed 配套静态文件 — static/robots.txt
+  - [x] 4.5 SEO 与 Feed 配套静态文件 — static/robots.txt
     - 创建 `static/robots.txt`：
       ```text
       User-agent: *
@@ -219,7 +219,7 @@
     - 验证：`hugo --minify --gc` 后 `cat public/robots.txt` 应包含 `Sitemap: https://{YOUR_DOMAIN}/sitemap.xml`（暂时仍是占位符是预期行为）
     - _Requirements: 10.5, 10.6_
 
-  - [ ] 4.6 P4 检查点 — 本地构建并人工巡检
+  - [x] 4.6 P4 检查点 — 本地构建并人工巡检
     - 执行 `hugo --minify --gc`
     - 验证以下文件均存在并非空：
       - `public/index.html`、`public/about/index.html`、`public/posts/index.html`
@@ -229,10 +229,10 @@
     - 在 `public/posts/hello-world/index.html` 中 grep 应能命中：`giscus.app`（评论开启时）、`katex.min.css`（math 开启时）、`<meta property="og:type" content="article">`（PaperMod 默认）
     - 失败时检查任务 4.1–4.5 的对应文件路径，重做后再次构建。
 
-- [ ] 5. P5：SEO、Feed、robots.txt、OG 回退验证
+- [x] 5. P5：SEO、Feed、robots.txt、OG 回退验证
   - 这一阶段不再增改文件，而是把 SEO/Feed/OG 的覆盖在产物上"逐项验"，确认满足 Requirement 10 的所有条款。
 
-  - [ ] 5.1 验证 sitemap.xml 完备性
+  - [x] 5.1 验证 sitemap.xml 完备性
     - 执行：`hugo --minify --gc`
     - 解析 `public/sitemap.xml`：`grep -oE '<loc>[^<]+</loc>' public/sitemap.xml | sort -u`
     - 期望集合至少包含：`/`、`/about/`、`/posts/`、`/posts/hello-world/`、`/posts/about-me/`、`/tags/`、`/tags/{slugified-tag}/`、`/categories/`、`/categories/{slugified-category}/`、`/search/`
@@ -240,18 +240,18 @@
     - _Requirements: 10.3_
     - _Properties: P5_
 
-  - [ ] 5.2 验证 RSS Feed 与列表倒序
+  - [x] 5.2 验证 RSS Feed 与列表倒序
     - `head -120 public/index.xml`：应包含至少 2 个 `<item>`，每个含 `<title>` `<link>` `<pubDate>` `<description>`
     - 校对 `<pubDate>` 严格降序；`<description>` 不少于 200 字或包含正文摘要
     - _Requirements: 7.2, 10.4_
     - _Properties: P6_
 
-  - [ ] 5.3 验证 robots.txt MIME 与 Sitemap 指令
+  - [x] 5.3 验证 robots.txt MIME 与 Sitemap 指令
     - `cat public/robots.txt` 必须含 `Sitemap: https://{YOUR_DOMAIN}/sitemap.xml`（任务 8.4 后变成真实域名）
     - 模拟 MIME 检查：`hugo server` 后 `curl -sI http://localhost:1313/robots.txt | grep -i 'content-type'` 应输出 `text/plain`
     - _Requirements: 10.5, 10.6_
 
-  - [ ] 5.4 验证 OG / meta 回退
+  - [x] 5.4 验证 OG / meta 回退
     - 在浏览器打开 `public/index.html` 与 `public/posts/hello-world/index.html` 的源代码
     - `<title>` 长度 ≤ 70；`<meta name="description">` content 长度 ≤ 160；`<head>` 含 `og:title`、`og:description`、`og:image`、`og:url`、`og:type` 五个 meta；文章详情页 `og:type=article`、其它 `og:type=website`
     - 临时把 hello-world.md 中的 `description` 字段清空再构建，应自动回退为正文前 ≤ 160 字符；测后恢复字段
@@ -261,7 +261,7 @@
 - [ ] 6. P6：校验脚本与正确性属性测试
   - 建立 Node + TypeScript + fast-check + vitest 测试工程，覆盖 design.md §Correctness Properties 的 15 条 Property，并提供给本地预提交使用的 `scripts/preflight.sh`、`scripts/check_slugs.py`、`scripts/check_frontmatter.py`、`scripts/check_internal_links.mjs` 工具。
 
-  - [ ] 6.1 初始化 Node 测试工程
+  - [x] 6.1 初始化 Node 测试工程
     - `mkdir -p tests/properties tests/build tests/fixtures scripts`
     - 在仓库根创建 `package.json`：
       ```json

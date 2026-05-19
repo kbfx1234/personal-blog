@@ -1,0 +1,31 @@
+{{- define "main" }}
+<header class="page-header">
+  <h1>{{ .Title }}</h1>
+  {{- with .Description }}
+  <div class="post-description">{{ . }}</div>
+  {{- end }}
+</header>
+
+<link href="/pagefind/pagefind-ui.css" rel="stylesheet">
+<div id="search" class="post-content"></div>
+<script src="/pagefind/pagefind-ui.js"></script>
+<script>
+  window.addEventListener('DOMContentLoaded', function () {
+    if (typeof PagefindUI === 'undefined') {
+      var el = document.getElementById('search');
+      if (el) {
+        el.innerHTML = '<p>搜索索引尚未生成。请运行带 Pagefind 的完整构建（npm run build:full），或稍候片刻再试。</p>';
+      }
+      return;
+    }
+    new PagefindUI({
+      element: '#search',
+      showSubResults: true,
+      translations: {
+        placeholder: {{ .Params.placeholder | default "Search…" | jsonify }},
+        zero_results: '没有找到匹配 "[SEARCH_TERM]" 的内容'
+      }
+    });
+  });
+</script>
+{{- end }}

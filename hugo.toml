@@ -54,7 +54,7 @@ enableGitInfo = true
   ShowToc = true
   TocOpen = false
   ShowRssButtonInSectionTermList = true
-  math = true
+  math = false
   comments = true
 
   [params.homeInfoParams]

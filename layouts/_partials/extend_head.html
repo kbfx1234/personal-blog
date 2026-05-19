@@ -1,0 +1,49 @@
+{{- /*
+  extend_head.html — appended at the end of <head> by PaperMod's head.html.
+
+  Responsibilities:
+    1. Google Search Console verification meta (when params.googleSiteVerification set).
+    2. KaTeX assets when params.math (site or page) is true.
+    3. Cloudflare Web Analytics beacon when params.analytics.cloudflare.token is a real value
+       (skipped while still a {PLACEHOLDER}).
+
+  PaperMod already emits canonical <title>, <meta description>, and the full Open Graph
+  / Twitter Card block, so we don't duplicate those here.
+*/ -}}
+
+{{- /* Google Search Console verification (set params.googleSiteVerification when ready) */ -}}
+{{- with .Site.Params.googleSiteVerification }}
+<meta name="google-site-verification" content="{{ . }}" />
+{{- end }}
+
+{{- /* KaTeX rendering when params.math = true (page-level overrides site-level) */ -}}
+{{- $math := .Params.math }}
+{{- if eq $math nil }}{{ $math = .Site.Params.math }}{{ end }}
+{{- if $math }}
+<link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"
+      integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+"
+      crossorigin="anonymous">
+<script defer
+        src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"
+        integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg"
+        crossorigin="anonymous"></script>
+<script defer
+        src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+        integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk"
+        crossorigin="anonymous"
+        onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true},{left: '$', right: '$', display: false}]});"></script>
+{{- end }}
+
+{{- /* Cloudflare Web Analytics — only emit when token is a real value, not a {PLACEHOLDER}. */ -}}
+{{- with .Site.Params.analytics }}
+  {{- with .cloudflare }}
+    {{- with .token }}
+      {{- if not (or (eq . "") (hasPrefix . "{")) }}
+<script defer
+        src="https://static.cloudflareinsights.com/beacon.min.js"
+        data-cf-beacon='{"token": "{{ . }}"}'></script>
+      {{- end }}
+    {{- end }}
+  {{- end }}
+{{- end }}
