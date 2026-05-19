@@ -1,0 +1,125 @@
+# {YOUR_DOMAIN} placeholder — replace with real domain in P8 (task 8.4).
+# Hugo refuses non-RFC hostnames like {curly}, so we use example.com as a parseable stand-in.
+baseURL = "https://example.com/"
+locale = "zh-cn"
+defaultContentLanguage = "zh-cn"
+title = "karl 的博客"
+theme = "PaperMod"
+
+enableRobotsTXT = false
+buildDrafts = false
+buildFuture = false
+buildExpired = false
+enableEmoji = true
+enableGitInfo = true
+
+[pagination]
+  pagerSize = 10
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+  section = ["HTML", "RSS"]
+  taxonomy = ["HTML", "RSS"]
+  term = ["HTML", "RSS"]
+
+[minify]
+  disableXML = true
+
+[markup]
+  [markup.highlight]
+    style = "github"
+    lineNos = false
+    codeFences = true
+    guessSyntax = true
+  [markup.goldmark.renderer]
+    unsafe = true
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 4
+
+[taxonomies]
+  tag = "tags"
+  category = "categories"
+
+[params]
+  env = "production"
+  author = "Karl"
+  description = "记录学习、生活与思考"
+  defaultTheme = "auto"
+  ShowReadingTime = true
+  ShowShareButtons = false
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = true
+  ShowCodeCopyButtons = true
+  ShowToc = true
+  TocOpen = false
+  ShowRssButtonInSectionTermList = true
+  math = true
+  comments = true
+
+  [params.homeInfoParams]
+    Title = "你好，我是 Karl"
+    Content = "这里是我记录学习、生活与思考的地方。"
+
+  [[params.socialIcons]]
+    name = "github"
+    url = "https://github.com/kbfx1234"
+  [[params.socialIcons]]
+    name = "email"
+    url = "mailto:kbfx1234@gmail.com"
+  [[params.socialIcons]]
+    name = "rss"
+    url = "/index.xml"
+
+  [params.assets]
+    favicon = "/favicon.ico"
+    favicon16x16 = "/favicon.svg"
+    apple_touch_icon = "/apple-touch-icon.png"
+    og_image = "/og-default.png"
+
+  [params.giscus]
+    repo = "kbfx1234/personal-blog"
+    repoId = "{GISCUS_REPO_ID}"
+    category = "Comments"
+    categoryId = "{GISCUS_CATEGORY_ID}"
+    mapping = "pathname"
+    reactionsEnabled = "1"
+    emitMetadata = "0"
+    inputPosition = "bottom"
+    theme = "preferred_color_scheme"
+    lang = "zh-CN"
+
+  [params.analytics]
+    [params.analytics.cloudflare]
+      token = "{CF_WEB_ANALYTICS_TOKEN}"
+
+  [params.fuseOpts]
+    isCaseSensitive = false
+    shouldSort = true
+    location = 0
+    distance = 1000
+    threshold = 0.4
+    minMatchCharLength = 0
+    keys = ["title", "permalink", "summary", "content"]
+
+[menu]
+  [[menu.main]]
+    identifier = "posts"
+    name = "文章"
+    url = "/posts/"
+    weight = 10
+  [[menu.main]]
+    identifier = "tags"
+    name = "标签"
+    url = "/tags/"
+    weight = 20
+  [[menu.main]]
+    identifier = "about"
+    name = "关于"
+    url = "/about/"
+    weight = 30
+  [[menu.main]]
+    identifier = "search"
+    name = "搜索"
+    url = "/search/"
+    weight = 40
