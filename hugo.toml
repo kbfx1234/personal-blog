@@ -1,6 +1,7 @@
-# {YOUR_DOMAIN} placeholder — replace with real domain in P8 (task 8.4).
-# Hugo refuses non-RFC hostnames like {curly}, so we use example.com as a parseable stand-in.
-baseURL = "https://example.com/"
+# {YOUR_DOMAIN} placeholder — replace with real custom domain in P8 (task 8.4).
+# Until then we use the Cloudflare Pages auto-generated subdomain so that
+# absolute URLs in sitemap / RSS / Open Graph are real & crawlable.
+baseURL = "https://personal-blog-eqo.pages.dev/"
 locale = "zh-cn"
 defaultContentLanguage = "zh-cn"
 title = "karl 的博客"
