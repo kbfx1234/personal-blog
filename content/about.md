@@ -1,12 +1,14 @@
 +++
-title = '关于'
+title = 'About'
 date = 2026-05-19T09:00:00+08:00
 draft = false
 slug = 'about'
 summary = '关于这个博客的作者 Karl，以及联系方式。'
 description = 'Karl 的个人简介、研究与技术兴趣方向、联系方式。'
 images = ['/og-default.png']
-menu = 'main'
+[menu.main]
+name = 'About'
+weight = 40
 ShowReadingTime = false
 ShowToc = false
 ShowBreadCrumbs = false

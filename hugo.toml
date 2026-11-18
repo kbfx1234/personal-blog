@@ -1,7 +1,7 @@
 baseURL = "https://karl.loc.cc/"
 locale = "zh-cn"
 defaultContentLanguage = "zh-cn"
-title = "karl 的博客"
+title = "Karl's Notes"
 theme = "PaperMod"
 
 enableRobotsTXT = false
@@ -42,8 +42,8 @@ enableGitInfo = true
 [params]
   env = "production"
   author = "Karl"
-  description = "记录学习、生活与思考"
-  defaultTheme = "auto"
+  description = "Software engineering, applied AI, and notes on making complex things clear."
+  defaultTheme = "dark"
   googleSiteVerification = "5x7gh_K5zHxUCZ6abVk2RVL1yFApiUZchXrNqaZmmpc"
   ShowReadingTime = true
   ShowShareButtons = false
@@ -75,6 +75,7 @@ enableGitInfo = true
     favicon16x16 = "/favicon.svg"
     apple_touch_icon = "/apple-touch-icon.png"
     og_image = "/og-default.png"
+    theme_color = "#101411"
 
   [params.giscus]
     repo = "kbfx1234/personal-blog"
@@ -104,16 +105,16 @@ enableGitInfo = true
 [menu]
   [[menu.main]]
     identifier = "posts"
-    name = "Writings"
+    name = "Writing"
     url = "/posts/"
     weight = 10
   [[menu.main]]
     identifier = "tags"
-    name = "标签"
+    name = "Topics"
     url = "/tags/"
     weight = 20
   [[menu.main]]
     identifier = "search"
-    name = "搜索"
+    name = "Search"
     url = "/search/"
     weight = 30

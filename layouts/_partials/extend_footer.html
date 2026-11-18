@@ -1,0 +1,56 @@
+<script>
+  (() => {
+    const finePointer = window.matchMedia('(pointer: fine)');
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (!finePointer.matches || reducedMotion.matches) return;
+
+    const spotlight = document.createElement('div');
+    const ring = document.createElement('div');
+    spotlight.className = 'cursor-spotlight';
+    ring.className = 'cursor-ring';
+    spotlight.setAttribute('aria-hidden', 'true');
+    ring.setAttribute('aria-hidden', 'true');
+    document.body.append(spotlight, ring);
+
+    let frame = 0;
+    let x = window.innerWidth / 2;
+    let y = window.innerHeight / 2;
+    let nextX = x;
+    let nextY = y;
+
+    const render = () => {
+      x += (nextX - x) * 0.16;
+      y += (nextY - y) * 0.16;
+      document.documentElement.style.setProperty('--cursor-x', `${x}px`);
+      document.documentElement.style.setProperty('--cursor-y', `${y}px`);
+      frame = requestAnimationFrame(render);
+    };
+
+    const onMove = (event) => {
+      nextX = event.clientX;
+      nextY = event.clientY;
+      document.body.classList.add('cursor-is-visible');
+    };
+
+    const onLeave = () => document.body.classList.remove('cursor-is-visible');
+    const interactive = document.querySelectorAll('a, button');
+    const onInteractiveEnter = () => document.body.classList.add('cursor-is-interactive');
+    const onInteractiveLeave = () => document.body.classList.remove('cursor-is-interactive');
+    interactive.forEach((element) => {
+      element.addEventListener('pointerenter', onInteractiveEnter, { passive: true });
+      element.addEventListener('pointerleave', onInteractiveLeave, { passive: true });
+    });
+    window.addEventListener('pointermove', onMove, { passive: true });
+    document.documentElement.addEventListener('mouseleave', onLeave);
+    frame = requestAnimationFrame(render);
+
+    window.addEventListener('pagehide', () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener('pointermove', onMove);
+      interactive.forEach((element) => {
+        element.removeEventListener('pointerenter', onInteractiveEnter);
+        element.removeEventListener('pointerleave', onInteractiveLeave);
+      });
+    }, { once: true });
+  })();
+</script>

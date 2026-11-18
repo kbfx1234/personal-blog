@@ -1,24 +1,14 @@
 +++
 title = "Karl"
-description = "Karl 的个人主页"
+description = "Karl's personal site for software engineering, applied AI, and long-term learning."
+
+[params]
+role = "Software engineer / AI explorer"
+headline = "I build systems, then write down what I learned."
+tagline = "Software engineering, applied AI, and clear thinking."
+email = "kbfx1234@gmail.com"
 +++
 
-<div class="home-intro">
+I work in software engineering and explore how AI can become useful in everyday tools and workflows. This is where I keep learning notes, project retrospectives, and ideas that are still taking shape.
 
-# Karl
-
-<span class="home-email">kbfx1234 [at] gmail [dot] com</span>
-
-<nav class="home-links">
-
-[GitHub](https://github.com/kbfx1234)&emsp;[Writings](/posts/)
-
-</nav>
-
-I'm interested in technology, AI, and building things that work. I enjoy understanding complex systems and explaining them clearly.
-
-Currently focused on software engineering and exploring applications of machine learning. I believe in learning by doing and writing to think.
-
-This site is where I record my learning notes, project retrospectives, and occasional thoughts.
-
-</div>
+I like to build first, then write to test my own decisions. Each note tries to answer a concrete question and leave behind a process that can be reused.

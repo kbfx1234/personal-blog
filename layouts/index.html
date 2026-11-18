@@ -1,7 +1,149 @@
 {{- define "main" }}
-<article class="home-page">
-  <div class="post-content">
-    {{ .Content }}
+{{- $writing := where site.RegularPages "Type" "posts" -}}
+{{- $writing = where $writing "Params.hiddenInHomeList" "!=" "true" -}}
+{{- $projects := where site.RegularPages "Type" "projects" -}}
+{{- $experience := where site.RegularPages "Type" "experience" -}}
+
+<div class="home-layout">
+  <aside class="home-sidebar" aria-label="Profile">
+    <div class="home-sidebar__top">
+      <a class="home-mark" href="{{ "/" | relURL }}" aria-label="{{ site.Title }}">
+        <span class="home-mark__dot" aria-hidden="true"></span>
+        <span>{{ site.Params.author }}</span>
+      </a>
+      <p class="home-sidebar__role">{{ .Params.role | default "Software engineer" }}</p>
+      <p class="home-sidebar__tagline">{{ .Params.tagline | default site.Params.description }}</p>
+    </div>
+
+    <nav class="home-nav" aria-label="Section navigation">
+      <a class="home-nav__link" href="#about">About</a>
+      <a class="home-nav__link" href="#currently">Currently</a>
+      <a class="home-nav__link" href="#writing">Writing</a>
+      <a class="home-nav__link" href="#projects">Projects</a>
+      <a class="home-nav__link" href="#experience">Experience</a>
+      <a class="home-nav__link" href="#contact">Contact</a>
+    </nav>
+
+    <div class="home-sidebar__bottom">
+      <div class="home-socials" aria-label="Social links">
+        {{- range site.Params.socialIcons }}
+        {{- $label := .name | title -}}
+        {{- if eq .name "github" }}{{ $label = "GitHub" }}{{ else if eq .name "rss" }}{{ $label = "RSS" }}{{ end -}}
+        <a href="{{ .url | safeURL }}"{{ if hasPrefix .url "http" }} target="_blank" rel="noopener noreferrer"{{ end }}>{{ $label }}</a>
+        {{- end }}
+      </div>
+      <span class="home-sidebar__location">Shanghai · China</span>
+    </div>
+  </aside>
+
+  <div class="home-content">
+    <section class="home-hero" id="about" aria-labelledby="home-title">
+      <p class="section-kicker">Hello, I’m Karl.</p>
+      <h1 id="home-title">{{ .Params.headline | default "I build systems, then write down what I learned." }}</h1>
+      <div class="home-lede">
+        {{ .Content }}
+      </div>
+    </section>
+
+    <section class="home-section" id="currently" aria-labelledby="currently-title">
+      <div class="section-heading">
+        <h2 id="currently-title">Currently</h2>
+        <span class="section-index">01</span>
+      </div>
+      <ul class="focus-list">
+        <li><span class="focus-list__label">01</span><span>Deepening the software engineering fundamentals I use every day.</span></li>
+        <li><span class="focus-list__label">02</span><span>Exploring practical applications of AI in tools and workflows.</span></li>
+        <li><span class="focus-list__label">03</span><span>Writing to make projects, decisions, and complex ideas easier to understand.</span></li>
+      </ul>
+    </section>
+
+    <section class="home-section" id="writing" aria-labelledby="writing-title">
+      <div class="section-heading">
+        <h2 id="writing-title">Selected writing</h2>
+        <a class="section-link" href="{{ "/posts/" | relURL }}">View all <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="writing-list">
+        {{- range first 3 $writing }}
+        <a class="writing-item" href="{{ .RelPermalink }}">
+          <div class="writing-item__meta">
+            <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006" }}</time>
+            <span>{{ .ReadingTime }} min read</span>
+          </div>
+          <div class="writing-item__body">
+            <h3>{{ .Title }}</h3>
+            <p>{{ .Summary | plainify | htmlUnescape }}</p>
+            <span class="writing-item__cta">Read note <span aria-hidden="true">↗</span></span>
+          </div>
+        </a>
+        {{- else }}
+        <p class="empty-note">More notes are on the way.</p>
+        {{- end }}
+      </div>
+    </section>
+
+    <section class="home-section" id="projects" aria-labelledby="projects-title">
+      <div class="section-heading">
+        <h2 id="projects-title">Projects</h2>
+        <span class="section-index">02</span>
+      </div>
+      <div class="project-list">
+        {{- range first 4 $projects }}
+        <article class="project-item">
+          <div class="project-item__top">
+            <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+            {{- with .Params.period }}<span>{{ . }}</span>{{ end }}
+          </div>
+          <p>{{ .Summary | plainify | htmlUnescape }}</p>
+          {{- with .Params.stack }}
+          <ul class="project-tags" aria-label="技术栈">
+            {{- range . }}<li>{{ . }}</li>{{ end }}
+          </ul>
+          {{- end }}
+        </article>
+        {{- else }}
+        <div class="module-empty">
+          <span class="module-empty__mark" aria-hidden="true">+</span>
+          <div><strong>Projects will live here.</strong><p>Add a project to share its context, your role, and the technical decisions behind it.</p></div>
+        </div>
+        {{- end }}
+      </div>
+    </section>
+
+    <section class="home-section" id="experience" aria-labelledby="experience-title">
+      <div class="section-heading">
+        <h2 id="experience-title">Experience</h2>
+        <span class="section-index">03</span>
+      </div>
+      <div class="experience-list">
+        {{- range first 6 $experience }}
+        <article class="experience-item">
+          <div class="experience-item__meta">{{ .Params.period | default (.Date.Format "2006") }}</div>
+          <div>
+            <h3>{{ .Title }}</h3>
+            <p>{{ .Summary | plainify | htmlUnescape }}</p>
+          </div>
+        </article>
+        {{- else }}
+        <div class="module-empty">
+          <span class="module-empty__mark" aria-hidden="true">+</span>
+          <div><strong>Experience will take shape here.</strong><p>Add a role, study period, or long-running commitment to build the timeline.</p></div>
+        </div>
+        {{- end }}
+      </div>
+    </section>
+
+    <section class="home-section home-contact" id="contact" aria-labelledby="contact-title">
+      <div class="section-heading">
+        <h2 id="contact-title">Keep in touch</h2>
+        <span class="section-index">04</span>
+      </div>
+      <p>If you are building software, exploring AI, or just want to exchange an idea, feel free to reach out.</p>
+      <a class="contact-link" href="mailto:{{ .Params.email | default "kbfx1234@gmail.com" }}">
+        {{ .Params.email | default "kbfx1234@gmail.com" }} <span aria-hidden="true">↗</span>
+      </a>
+    </section>
+
+    <p class="home-signoff">Built slowly, one note at a time.</p>
   </div>
-</article>
+</div>
 {{- end }}
